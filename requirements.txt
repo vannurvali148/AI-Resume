@@ -1,0 +1,7 @@
+streamlit
+openai
+python-dotenv
+scikit-learn
+pandas
+numpy
+plotly

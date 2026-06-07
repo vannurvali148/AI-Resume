@@ -217,7 +217,16 @@ def get_base64_of_bin_file(bin_file):
     except Exception:
         return ""
 
-bg_base64 = get_base64_of_bin_file("bg_image.png")
+page_bg_map = {
+    "landing": "landing_bg.png",
+    "login": "login_bg.png",
+    "signup": "signup_bg.png",
+    "dashboard": "bg_image.png"
+}
+current_page = st.session_state.get("page", "landing")
+bg_filename = page_bg_map.get(current_page, "bg_image.png")
+
+bg_base64 = get_base64_of_bin_file(bg_filename)
 overlay_color = "rgba(15, 23, 42, 0.85)" if st.session_state.theme == "dark" else "rgba(248, 250, 252, 0.85)"
 if bg_base64:
     bg_css = f'background-image: linear-gradient({overlay_color}, {overlay_color}), url("data:image/png;base64,{bg_base64}"); background-size: cover; background-position: center; background-attachment: fixed;'

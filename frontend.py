@@ -7,6 +7,7 @@ import docx
 import pytesseract
 from PIL import Image
 import io
+import base64
 
 def extract_text_from_file(uploaded_file):
     if uploaded_file is None:
@@ -208,6 +209,22 @@ def reset_app():
 # CUSTOM CSS
 # -----------------------------------
 
+def get_base64_of_bin_file(bin_file):
+    try:
+        with open(bin_file, 'rb') as f:
+            data = f.read()
+        return base64.b64encode(data).decode()
+    except Exception:
+        return ""
+
+bg_base64 = get_base64_of_bin_file("bg_image.png")
+overlay_color = "rgba(15, 23, 42, 0.85)" if st.session_state.theme == "dark" else "rgba(248, 250, 252, 0.85)"
+if bg_base64:
+    bg_css = f'background-image: linear-gradient({overlay_color}, {overlay_color}), url("data:image/png;base64,{bg_base64}"); background-size: cover; background-position: center; background-attachment: fixed;'
+else:
+    bg_css = 'background-color: var(--bg-main) !important; background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.05), transparent 40%), radial-gradient(circle at bottom left, rgba(99, 102, 241, 0.05), transparent 40%);'
+
+
 st.markdown(f'''
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -233,11 +250,38 @@ st.markdown(f'''
     }}
     
     .stApp {{
-        background-color: var(--bg-main) !important;
-        background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.05), transparent 40%),
-                          radial-gradient(circle at bottom left, rgba(99, 102, 241, 0.05), transparent 40%);
+        {bg_css}
         color: var(--text-main) !important;
         transition: all 0.3s ease;
+    }}
+    
+    /* Smooth Scrolling Effect */
+    html {{
+        scroll-behavior: smooth;
+    }}
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {{
+        width: 10px;
+    }}
+    ::-webkit-scrollbar-track {{
+        background: var(--bg-main);
+    }}
+    ::-webkit-scrollbar-thumb {{
+        background: var(--primary);
+        border-radius: 5px;
+    }}
+    ::-webkit-scrollbar-thumb:hover {{
+        background: var(--primary-hover);
+    }}
+
+    /* Custom Cursor Effect */
+    body, .stApp, .block-container {{
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%236366f1" opacity="0.8"/></svg>') 12 12, auto !important;
+    }}
+    
+    a, button, [role="button"], input, select, textarea, .stFileUploaderDropzone {{
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="%23818cf8" opacity="0.5"/><circle cx="16" cy="16" r="4" fill="%234f46e5"/></svg>') 16 16, pointer !important;
     }}
     
     /* Global animations */

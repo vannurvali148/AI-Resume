@@ -1225,6 +1225,17 @@ st.markdown("""
         .feature-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; }
         .st-key-landing_card [data-testid="stHorizontalBlock"] { gap: 1rem !important; flex-direction: column !important; }
         .st-key-resume_upload_card, .st-key-job_upload_card { padding: 14px 16px 16px !important; }
+        
+        /* New Landing Page Mobile Fixes */
+        .hero-container { padding: 3rem 1rem !important; margin-top: 0 !important; }
+        .hero-title { font-size: 2.2rem !important; }
+        .hero-subtitle { font-size: 1rem !important; }
+        .stats-banner { flex-direction: column !important; gap: 1.5rem !important; padding: 2rem 1rem !important; }
+        .stat-item h3 { font-size: 2.5rem !important; }
+        .steps-container { flex-direction: column !important; }
+        .cta-container { padding: 2rem 1rem !important; }
+        div[data-testid="stHorizontalBlock"]:first-of-type { flex-direction: column !important; align-items: stretch !important; gap: 0.5rem !important; }
+        div[data-testid="stHorizontalBlock"]:first-of-type > div { width: 100% !important; margin-bottom: 0.5rem !important; }
     }
 
     @media (max-width: 480px) {

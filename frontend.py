@@ -249,7 +249,7 @@ st.markdown(f'''
         font-family: var(--font-main);
     }}
     
-    .stApp {{
+    .stApp, [data-testid="stAppViewContainer"] {{
         {bg_css}
         color: var(--text-main) !important;
         transition: all 0.3s ease;
@@ -299,7 +299,7 @@ st.markdown("""
        GLOBAL / APP
        ========================================================= */
     .stApp {
-        background: var(--bg-main);
+        background: transparent !important;
         color: var(--text-main);
     }
 

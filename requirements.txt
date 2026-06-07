@@ -5,3 +5,7 @@ scikit-learn
 pandas
 numpy
 plotly
+PyMuPDF
+python-docx
+Pillow
+pytesseract
